@@ -1,0 +1,44 @@
+[
+    {
+        "categoria": "Arte y literatura",
+        "pregunta": "Pintores mas famosos",
+        "respuesta1": "Leonardo da Vinci",
+        "respuesta2": "Picasso",
+        "respuesta3": "Van Gogh",
+        "respuesta4": "Michelangelo",
+        "imagen": "https://i.ibb.co/9cjvmw1/mona-lisa.jpg",
+        "objectFit": "cover",
+        "Puntaje1": "100",
+        "Puntaje2": "50",
+        "Puntaje3": "25",
+        "Puntaje4": "10"
+    },
+    {
+        "categoria": "Arte y literatura",
+        "pregunta": "Pintores mas famosso de mexico",
+        "respuesta1": "Diego Rivera",
+        "respuesta2": "Frida Kahlo",
+        "respuesta3": "Rufino Tamayo",
+        "respuesta4": "David Alfaro",
+        "imagen": "https://i.ibb.co/SDjX7PM/jardin-de-las-delicias.jpg",
+        "objectFit": "cover",
+        "Puntaje1": "100",
+        "Puntaje2": "50",
+        "Puntaje3": "25",
+        "Puntaje4": "10"
+    },
+    {
+        "categoria": "Arte y literatura",
+        "pregunta": "Pintores mas famosso de mexico2",
+        "respuesta1": "Diego Rivera",
+        "respuesta2": "Frida Kahlo",
+        "respuesta3": "Rufino Tamayo",
+        "respuesta4": "David Alfaro",
+        "imagen": "https://i.ibb.co/SDjX7PM/jardin-de-las-delicias.jpg",
+        "objectFit": "cover",
+        "Puntaje1": "100",
+        "Puntaje2": "50",
+        "Puntaje3": "25",
+        "Puntaje4": "10"
+    }
+]

@@ -113,20 +113,7 @@
     <button class="btn" id="agregar-btn" onclick="AgregarE2()">Agregar</button>
   </div>
 
-  <div id="BotonInicio" style="display: none;">
-    <div class="contenedor">
-      <div id="equipo1" class="equipo">
-        <h2>Equipo 1</h2>
-        <p>Presiona la tecla "A"</p>
-      </div>
 
-      <div id="equipo2" class="equipo">
-        <h2>Equipo 2</h2>
-        <p>Presiona la tecla "L"</p>
-      </div>
-    </div>
-    <div id="resultado"></div>
-  </div>
 
 
 
@@ -148,14 +135,34 @@
       <div class="pregunta" id="pregunta">
       </div>
       <img src="#" class="imagen" id="imagen">
+      <div><input type="text" id="res"></div>
+      <div>
+        <label id="res1"></label><br>
+        <label id="res2"></label><br>
+        <label id="res3"></label><br>
+        <label id="res4"></label><br>
+      </div>
     </div>
-    <div class="btn" id="btn1" onclick="oprimir_btn(0)"></div>
-    <div class="btn" id="btn2" onclick="oprimir_btn(1)"></div>
-    <div class="btn" id="btn3" onclick="oprimir_btn(2)"></div>
-    <div class="btn" id="btn4" onclick="oprimir_btn(3)"></div>
+    <div id="BotonInicio" style="display: none;">
+      <div class="">
+        <div id="equipo1" class="equipo">
+          <h2>Equipo 1</h2>
+          <p>Presiona la tecla "A"</p>
+        </div>
+
+        <div id="equipo2" class="equipo">
+          <h2>Equipo 2</h2>
+          <p>Presiona la tecla "L"</p>
+        </div>
+      </div>
+      <div id="resultado"></div>
+    </div>
+    <div class="btn" id="btn1" onclick="oprimir_btn()" >Aceptar</div>
+    
+
 
     <div class="contenedor">
-      
+
       <div>
         <div style="display: inline-flexbox;">
           <h1>Equipo 1</h1>
@@ -172,7 +179,7 @@
         </div>
       </div>
 
-      
+
 
     </div>
 
