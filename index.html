@@ -2,190 +2,311 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Juego de preguntas</title>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/LED%20Counter%207.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway+Dots&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
+    <style>
+        .background {
+            background-color: #44f814;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Opacidad del fondo opacado */
+            z-index: 9999;
+            /* Asegura que el bloque esté por encima del contenido principal */
+        }
+
+        .sobre {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* Estilos y dimensiones para tu bloque superpuesto */
+            /* Por ejemplo: */
+            width: 100%;
+            height: 100%;
+            /* Fondo semitransparente */
+            z-index: 9999;
+            /* Valor alto para asegurar que esté en frente */
+            pointer-events: none;
+        }
+
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        .message p {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .nom1 {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: black;
+            color: white;
+            border-radius: 10px;
+            border: 2px solid white;
+            font-family: 'LED Counter 7';
+
+        }
+
+        .image-container {
+            position: relative;
+        }
+
+        .image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'LED Counter 7'
+        }
+
+        .image-container img {
+            width: 450px;
+            /* Ajusta el ancho deseado */
+            height: auto;
+            /* La altura se ajustará automáticamente */
+        }
+    </style>
 </head>
 
-<body>
-  <style>
-    * {
-      transition: all 0.3s;
-    }
-
-    body {
-      background: cadetblue;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-      font-family: calibri;
-      font-size: 120%;
-    }
-
-    .contenedor {
-      width: 98vw;
-      height: 97vh;
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .encabezado {
-      position: relative;
-      background: white;
-      min-width: 300px;
-      width: 70%;
-      max-width: 600px;
-      padding: 10px;
-    }
-
-    .categoria {
-      opacity: 0.3;
-      text-align: left;
-    }
-
-    .pregunta {
-      padding: 10px;
-    }
-
-    .imagen {
-      object-fit: cover;
-      height: 0px;
-      width: 0px;
-    }
-
-    .btn {
-      background: white;
-      width: 60%;
-      max-width: 550px;
-      padding: 10px;
-      margin: 5px;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-    }
-
-    .numero {
-      position: absolute;
-      opacity: 0.3;
-      top: 10px;
-      right: 10px;
-    }
-
-    .puntaje {
-      padding: 10px;
-      color: white;
-    }
-
-    .equipo {
-      width: 200px;
-      margin: 20px;
-      padding: 20px;
-      background-color: #f2f2f2;
-      text-align: center;
-    }
-
-    .equipo h2 {
-      margin-top: 0;
-    }
-  </style>
-
-  <div class="contenedor" id="Bienvenida">
-    <h1>Bienvenido</h1>
-    <p>¡Gracias por visitar nuestro sitio web!</p>
-    <div class="btn" id="btnprin" onclick="iniciar()">Iniciar juego</div>
-  </div>
-
-  <div id="Equipo1" class="contenedor" style="display: none">
-    <h1>Equipo 1</h1>
-    <input type="text" id="nombre-input" placeholder="Nombre del participante"><br>
-    <input type="text" id="nombre-input2" placeholder="Nombre del participante 2"><br>
-    <button class="btn" id="agregar-btn" onclick="AgregarE1()">Agregar</button>
-  </div>
-
-  <div id="Equipo2" class="contenedor" style="display: none">
-    <h1>Equipo 2</h1>
-    <input type="text" id="nombre-input3" placeholder="Nombre del participante"><br>
-    <input type="text" id="nombre-input4" placeholder="Nombre del participante 2"><br>
-    <button class="btn" id="agregar-btn" onclick="AgregarE2()">Agregar</button>
-  </div>
-
-
-
-
-
-  <div class="contenedor" id="preguntas" style="display: none">
-    <LABEL id="iniciador">INICIA EQUIPO </LABEL>
-    <div>
-      Cantidad de errores:
-      <LABEL id="error"></LABEL>
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="77"
+    style="background: url(&quot;assets/img/fondo%20azul%20.png&quot;) center / cover no-repeat;">
+    <div id="Bienvenida">
+        <header class="text-center text-white bg-primary masthead"
+            style="background: url(&quot;assets/img/fondo%20azul%20.png&quot;) round;">
+            <div class="container">
+                <img class="img-fluid d-block mx-auto mb-5" src="assets/img/logo.png" width="489" height="391"
+                    style="margin: -154px;width: 562px;height: 460.188px;">
+                <a class="btn btn-primary" role="button" data-bss-hover-animate="flash"
+                    style="transform: scale(13);background: url(&quot;assets/img/INICIAR.png&quot;) center / cover no-repeat;border-style: none;transform-origin: center;"
+                    onclick="iniciar()"></a>
+            </div>
+        </header>
     </div>
-    <div>
-      Puntos en ronda:
-      <LABEL id="ronda"></LABEL>
+
+    <div id="Equipo1" style="display: none;">
+        <header class="masthead"
+            style="background: url(&quot;assets/img/FONDO%20MARCADOR.png&quot;) center / contain no-repeat;position: relative;display: block ; width: 60%; height: 3842px;padding-top: 379px;padding-bottom: 74px;font-family: 'LED Counter 7';">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-8 mx-auto" style="margin: 0px; text-align: center;">
+
+                            <p class="flash animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';font-size: 38px;text-align: center;color: #44f814;">
+                                EQUIPO 1 ESCRIBA NOMBRE DE PARTICIPANTES:</p><br>
+                            <input
+                                style="color: white; margin: 0; background: none; border: initial; border-radius: initial; padding: 0;"
+                                type="text" id="nombre-input" placeholder="Nombre participante 1"><br>
+                            <p class="pulse animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';color: #44f814;font-size: 34px;text-align: center;margin: 0px;">
+                                ______________</p>
+                            <input
+                                style="color: white; margin: 0; background: none; border: initial; border-radius: initial; padding: 0;"
+                                type="text" id="nombre-input2" placeholder="Nombre participante 2"><br>
+                            <p class="pulse animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';color: #44f814;font-size: 34px;text-align: center;margin: 0px;">
+                                ______________</p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: right" ;><a class="btn " onclick="AgregarE1()" style="text-align: right;"><img
+                        src="assets/img/SIGUIENTE.png"
+                        style="width: 288px;padding-top: 0;padding-left: 0; transform: translate(644px) translateX(104px) translateY(-122px); transition: transform 0.3s ease; transform: translate(0, 0);"
+                        onmouseover="this.style.transform='translate(0, 0) scale(1.2)';"
+                        onmouseout="this.style.transform='translate(0, 0)';"></a>
+            </div>
+        </header>
     </div>
-    <div class="puntaje" id="puntaje"></div>
-    <div class="encabezado">
-      <div class="categoria" id="categoria">
-      </div>
-      <div class="numero" id="numero"></div>
-      <div class="pregunta" id="pregunta">
-      </div>
-      <img src="#" class="imagen" id="imagen">
-      <div><input type="text" id="res"></div>
-      <div>
-        <label id="res1"></label><br>
-        <label id="res2"></label><br>
-        <label id="res3"></label><br>
-        <label id="res4"></label><br>
-      </div>
+
+    <div id="Equipo2" style="display: none;">
+        <header class="masthead"
+            style="background: url(&quot;assets/img/FONDO%20MARCADOR.png&quot;) center / contain no-repeat;position: relative;display: block; width: 60%; height: 3842px;padding-top: 379px;padding-bottom: 74px;font-family: 'LED Counter 7';">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-8 mx-auto" style="margin: 0px; text-align: center;">
+
+                            <p class="flash animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';font-size: 38px;text-align: center;color: #44f814;">
+                                EQUIPO 2 ESCRIBA NOMBRE DE PARTICIPANTES:</p><br>
+                            <input
+                                style="color: white; margin: 0; background: none; border: initial; border-radius: initial; padding: 0;"
+                                type="text" id="nombre-input3" placeholder="Nombre participante 1"><br>
+                            <p class="pulse animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';color: #44f814;font-size: 34px;text-align: center;margin: 0px;">
+                                ______________</p>
+                            <input
+                                style="color: white; margin: 0; background: none; border: initial; border-radius: initial; padding: 0;"
+                                type="text" id="nombre-input4" placeholder="Nombre participante 2"><br>
+                            <p class="pulse animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';color: #44f814;font-size: 34px;text-align: center;margin: 0px;">
+                                ______________</p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: right" ;><a class="btn " onclick="AgregarE2()" style="text-align: right;"><img
+                        src="assets/img/SIGUIENTE.png"
+                        style="width: 288px;padding-top: 0;padding-left: 0; transform: translate(644px) translateX(104px) translateY(-122px); transition: transform 0.3s ease; transform: translate(0, 0);"
+                        onmouseover="this.style.transform='translate(0, 0) scale(1.2)';"
+                        onmouseout="this.style.transform='translate(0, 0)';"></a>
+            </div>
+        </header>
     </div>
-    <div id="BotonInicio" style="display: none;">
-      <div class="">
-        <div id="equipo1" class="equipo">
-          <h2>Equipo 1</h2>
-          <p>Presiona la tecla "A"</p>
+
+    <div id="preguntas" style="display: none; margin-left: 5%;">
+
+        <div class="sobre">
+            <div class="contenedor">
+                <div>
+                    <div style="display: inline-flexbox;">
+                        <h1 style="margin: 2%;">Equipo 1</h1>
+                        <label class="nom1" id="Par1" style="margin: 0.5%;"></label><br>
+                        <label class="nom1" id="Par2" style="margin: 0.5%;"></label><br>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="equipo2" class="equipo">
-          <h2>Equipo 2</h2>
-          <p>Presiona la tecla "L"</p>
+        <div class="sobre" style="text-align: right;">
+            <div class="contenedor">
+                <div>
+                    <div style="display: inline-flexbox;">
+                        <h1 style="margin: 2%;">Equipo 2</h1>
+                        <label class="nom1" id="Par3" style="margin: 0.5%;"></label><br>
+                        <label class="nom1" id="Par4" style="margin: 0.5%;"></label><br>
+                        <p id="score1"
+                            style="font-size: 46px;font-family: Ozone;color: rgb(255,255,255);transform: translateX(-687px) translateY(-104px) scale(1.91);background: url(&quot;assets/img/MARCADORES.png&quot;) center / contain no-repeat;text-align: center;padding: 18px;">
+                            X</p>
+                        <p id="score2"
+                            style="font-size: 46px;font-family: Ozone;color: rgb(255,255,255);transform: translateX(687px) translateY(-199px) scale(1.91);background: url(&quot;assets/img/MARCADORES.png&quot;) center / contain no-repeat;text-align: center;padding: 18px;margin: -21px;">
+                            X</p>
+                        <p id="ronda"
+                            style="font-size: 46px;font-family: Ozone;color: rgb(255,255,255);transform: translateX(387px) translateY(-240px) scale(1.91);background: url(&quot;assets/img/MARCADORES.png&quot;) center / contain no-repeat;text-align: center;padding: 18px;margin: -21px;">
+                            X</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div id="resultado"></div>
+
+        <header id="BotonInicio" class="masthead"
+            style="background: url(&quot;assets/img/FONDO%20MARCADOR.png&quot;) center / contain no-repeat;position: relative;display: block  ; width: 60%; height: 3842px;padding-top: 379px;padding-bottom: 74px;font-family: 'LED Counter 7';">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-8 mx-auto" style="margin: 0px; text-align: center;">
+
+
+                            <p id="pregunta" class="flash animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';font-size: 230%;text-align: center;color: #44f814;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6"
+                                        style="font-family: 'LED Counter 7';font-size: 230%;text-align: center;color: #44f814;">
+                                        <!-- Contenido de la primera columna -->
+                                        <h3>EQUIPO 1</h3>
+                                        <p>PRESIONA LETRA A</p>
+                                    </div>
+                                    <div class="col-md-6"
+                                        style="font-family: 'LED Counter 7';font-size: 230%;text-align: center;color: #44f814;">
+                                        <!-- Contenido de la segunda columna -->
+                                        <h3>EQUIPO 2</h3>
+                                        <p>PRESIONA LETRA L</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </p><br>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center" ;><button class="btn " style="text-align: right;"><img
+                        src="assets/img/SIGUIENTE.png"
+                        style="width: 288px;padding-top: 0;padding-left: 0; transform: translate(644px) translateX(104px) translateY(-122px); transition: transform 0.3s ease; transform: translate(0, 0);"
+                        onmouseover="this.style.transform='translate(0, 0) scale(1.2)';"
+                        onmouseout="this.style.transform='translate(0, 0)';"></button>
+            </div>
+        </header>
+
+        <header id="preg" class="masthead"
+            style="background: url(&quot;assets/img/FONDO%20MARCADOR.png&quot;) center / contain no-repeat;position: relative;display: none  ; width: 60%; height: 3842px;padding-top: 379px;padding-bottom: 74px;font-family: 'LED Counter 7';">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-8 mx-auto" style="margin: 0px; text-align: center;">
+                            <LABEL id="iniciador"
+                                style="font-family: 'LED Counter 7';font-size: 18px;text-align: center;color: #44f814;">EQUIPO
+                                1</LABEL>
+                            <p id="pregunta2" class="flash animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';font-size: 230%;text-align: center;color: #44f814;">
+                            </p>
+                            <div
+                                style="font-family: 'LED Counter 7';font-size: 15px;text-align: center;color: #44f814;">
+                                <label id="res1">--------- ---</label><br>
+                                <label id="res2">--------- ---</label><br>
+                                <label id="res3">--------- ---</label><br>
+                                <label id="res4">--------- ---</label><br>
+                            </div>
+                            <input
+                                style="color: white; margin: 0; background: none; border: initial; border-radius: initial; padding: 0;"
+                                type="text" id="res" placeholder="Ingrese la respuesta"><br>
+                            <p class="pulse animated infinite intro-text"
+                                style="font-family: 'LED Counter 7';color: #44f814;font-size: 34px;text-align: center;margin: 0px;">
+                                ______________</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center" ;><a class="btn " onclick="oprimir_btn()" style="text-align: right;"><img
+                        src="assets/img/SIGUIENTE.png"
+                        style="width: 288px;padding-top: 0;padding-left: 0; transform: translate(644px) translateX(104px) translateY(-122px); transition: transform 0.3s ease; transform: translate(0, 0);"
+                        onmouseover="this.style.transform='translate(0, 0) scale(1.2)';"
+                        onmouseout="this.style.transform='translate(0, 0)';"></a>
+            </div>
+        </header>
     </div>
-    <div class="btn" id="btn1" onclick="oprimir_btn()" >Aceptar</div>
-    
 
-
-    <div class="contenedor">
-
-      <div>
-        <div style="display: inline-flexbox;">
-          <h1>Equipo 1</h1>
-          <label id="Par1"></label>
-          <label id="Par2"></label>
-          <label id="score1"></label>
-        </div>
-
-        <div style="display: inline-flexbox;">
-          <h1>Equipo 2</h1>
-          <label id="Par3"></label>
-          <label id="Par4"></label>
-          <label id="score2"></label>
-        </div>
-      </div>
-
-
-
-    </div>
-
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/freelancer.js"></script>
     <script src="index.js"></script>
-  </div>
-
 </body>
 
 </html>

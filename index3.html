@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de preguntas</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+  <style>
+    * {
+      transition: all 0.3s;
+    }
+
+    body {
+      background: cadetblue;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      font-family: calibri;
+      font-size: 120%;
+    }
+
+    .contenedor {
+      width: 98vw;
+      height: 97vh;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .encabezado {
+      position: relative;
+      background: white;
+      min-width: 300px;
+      width: 70%;
+      max-width: 600px;
+      padding: 10px;
+    }
+
+    .categoria {
+      opacity: 0.3;
+      text-align: left;
+    }
+
+    .pregunta {
+      padding: 10px;
+    }
+
+    .imagen {
+      object-fit: cover;
+      height: 0px;
+      width: 0px;
+    }
+
+    .btn {
+      background: white;
+      width: 60%;
+      max-width: 550px;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .numero {
+      position: absolute;
+      opacity: 0.3;
+      top: 10px;
+      right: 10px;
+    }
+
+    .puntaje {
+      padding: 10px;
+      color: white;
+    }
+
+    .equipo {
+      width: 200px;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+
+    .equipo h2 {
+      margin-top: 0;
+    }
+  </style>
+
+  <div class="contenedor" id="Bienvenida">
+    <h1>Bienvenido</h1>
+    <p>¡Gracias por visitar nuestro sitio web!</p>
+    <div class="btn" id="btnprin" onclick="iniciar()">Iniciar juego</div>
+  </div>
+
+  <div id="Equipo1" class="contenedor" style="display: none">
+    <h1>Equipo 1</h1>
+    <input type="text" id="nombre-input" placeholder="Nombre del participante"><br>
+    <input type="text" id="nombre-input2" placeholder="Nombre del participante 2"><br>
+    <button class="btn" id="agregar-btn" onclick="AgregarE1()">Agregar</button>
+  </div>
+
+  <div id="Equipo2" class="contenedor" style="display: none">
+    <h1>Equipo 2</h1>
+    <input type="text" id="nombre-input3" placeholder="Nombre del participante"><br>
+    <input type="text" id="nombre-input4" placeholder="Nombre del participante 2"><br>
+    <button class="btn" id="agregar-btn" onclick="AgregarE2()">Agregar</button>
+  </div>
+
+
+
+
+
+  <div class="contenedor" id="preguntas" style="display: none">
+    <LABEL id="iniciador">INICIA EQUIPO </LABEL>
+    <div>
+      Cantidad de errores:
+      <LABEL id="error"></LABEL>
+    </div>
+    <div>
+      Puntos en ronda:
+      <LABEL id="ronda"></LABEL>
+    </div>
+    <div class="puntaje" id="puntaje"></div>
+    <div class="encabezado">
+      <div class="categoria" id="categoria">
+      </div>
+      <div class="numero" id="numero"></div>
+      <div class="pregunta" id="pregunta">
+      </div>
+      <img src="#" class="imagen" id="imagen">
+      <div><input type="text" id="res"></div>
+      <div>
+        <label id="res1"></label><br>
+        <label id="res2"></label><br>
+        <label id="res3"></label><br>
+        <label id="res4"></label><br>
+      </div>
+    </div>
+    <div id="BotonInicio" style="display: none;">
+      <div class="">
+        <div id="equipo1" class="equipo">
+          <h2>Equipo 1</h2>
+          <p>Presiona la tecla "A"</p>
+        </div>
+
+        <div id="equipo2" class="equipo">
+          <h2>Equipo 2</h2>
+          <p>Presiona la tecla "L"</p>
+        </div>
+      </div>
+      <div id="resultado"></div>
+    </div>
+    <div class="btn" id="btn1" onclick="oprimir_btn()" >Aceptar</div>
+    
+
+
+    <div class="contenedor">
+
+      <div>
+        <div style="display: inline-flexbox;">
+          <h1>Equipo 1</h1>
+          <label id="Par1"></label>
+          <label id="Par2"></label>
+          <label id="score1"></label>
+        </div>
+
+        <div style="display: inline-flexbox;">
+          <h1>Equipo 2</h1>
+          <label id="Par3"></label>
+          <label id="Par4"></label>
+          <label id="score2"></label>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <script src="index.js"></script>
+  </div>
+
+</body>
+
+</html>

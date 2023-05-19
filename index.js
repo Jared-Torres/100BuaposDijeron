@@ -41,7 +41,7 @@ let cont = 0;
 let robo = false;
 
 function iniciar() {
-  cambiarEstilo("Bienvenida", "display: none");
+  document.getElementById("Bienvenida").style.display = "none";
   cambiarEstilo("Equipo1", "display: block;     width: 98vw; height: 97vh; display: inline-flex; flex-direction: column; justify-content: center; align-items: center;");
 
 
@@ -70,8 +70,14 @@ function InicioRonda() {
   error = 0;
   aciertos = 0;
   scoreR = 0;
+  robo = false;
+  cont = 0;
+  firsWin = true;
+  scoreF1 = 0;
+  scoreF2 = 0;
 
-  cambiarEstilo("BotonInicio", "display: block;     width: 98vw; height: 97vh; display: inline-flex; flex-direction: column; justify-content: center; align-items: center;");
+  document.getElementById('preg').style.display = "none";
+  document.getElementById('BotonInicio').style.display = "block";
   cambiarEstilo("preguntas", "display: block;     width: 98vw; height: 97vh; display: inline-flex; flex-direction: column; justify-content: center; align-items: center;");
 
   document.getElementById('Par1').textContent = Par1;
@@ -86,18 +92,46 @@ function InicioRonda() {
   // Función para manejar el evento de teclado
   function teclaPresionada(event) {
     if (event.key === "a" || event.key === "A") {
-      alert("¡Equipo 1 ha presionado su tecla!");
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">TURNO EQUIPO 1</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
+      });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 2000);
       turnoE1 = true;
       document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";
-      cambiarEstilo("BotonInicio", "display: none");
+      document.getElementById("BotonInicio").style.display = "none";
+      document.getElementById('preg').style.display = "block";
 
       window.removeEventListener('keydown', teclaPresionada);
 
     } else if (event.key === "l" || event.key === "L") {
-      alert("¡Equipo 2 ha presionado su tecla!");
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">TURNO EQUIPO 2</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
+      });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 2000);
       turnoE1 = false;
       document.getElementById('iniciador').textContent = "TURNO EQUIPO 2";
-      cambiarEstilo("BotonInicio", "display: none");
+      document.getElementById("BotonInicio").style.display = "none";
+      document.getElementById('preg').style.display = "block";
 
       window.removeEventListener('keydown', teclaPresionada);
 
@@ -134,19 +168,37 @@ function escogerPreguntaAleatoria() {
     //Aquí es donde el juego se reinicia
     if (mostrar_pantalla_juego_términado) {
       if (scoreE1 > scoreE2) {
-        resultadoFinal = "GANA EQUIPO 1";
+        resultadoFinal = "GANA EQUIPO 1 CON " + scoreE1;
       }
       else {
-        resultadoFinal = "GANA EQUIPO 2";
+        resultadoFinal = "GANA EQUIPO 2 CON " + scoreE2;
       }
-      swal.fire({
-        title: "Juego finalizado T",
-        text:
-          resultadoFinal,
-        icon: "success"
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">' + resultadoFinal + '</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
       });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 5000);
     }
     if (reiniciar_puntos_al_reiniciar_el_juego) {
+      error = 0;
+      aciertos = 0;
+      scoreR = 0;
+      robo = false;
+      cont = 0;
+      firsWin = true;
+      scoreF1 = 0;
+      scoreF2 = 0;
+      scoreE1 = 0;
+      scoreE2 = 0;
       preguntas_correctas = 0
       preguntas_hechas = 0
       error = 0;
@@ -154,7 +206,7 @@ function escogerPreguntaAleatoria() {
       scoreR = 0;
 
       document.getElementById("preguntas").style.display = "none";
-      document.getElementById("Bienvenida").style.display = "inline-flex";
+      document.getElementById("Bienvenida").style.display = "BLOCK";
 
     }
     npreguntas = [];
@@ -167,38 +219,18 @@ function escogerPreguntaAleatoria() {
 
 function escogerPregunta(n) {
   pregunta = interprete_bp[n];
-  select_id("categoria").innerHTML = pregunta.categoria;
   select_id("pregunta").innerHTML = pregunta.pregunta;
-  select_id("numero").innerHTML = n;
+  select_id("pregunta2").innerHTML = pregunta.pregunta;
   document.getElementById('res1').textContent = "";
   document.getElementById('res2').textContent = "";
   document.getElementById('res3').textContent = "";
   document.getElementById('res4').textContent = "";
   document.getElementById('iniciador').textContent = "";
-  document.getElementById('error').textContent = error;
   document.getElementById('score1').textContent = scoreE1;
   document.getElementById('score2').textContent = scoreE2;
   document.getElementById('ronda').textContent = scoreR;
   let pc = preguntas_correctas;
-  if (preguntas_hechas > 1) {
-    select_id("puntaje").innerHTML = pc + "/" + (preguntas_hechas - 1);
-  } else {
-    select_id("puntaje").innerHTML = "";
-  }
 
-  style("imagen").objectFit = pregunta.objectFit;
-  //desordenarRespuestas(pregunta);
-  if (pregunta.imagen) {
-    select_id("imagen").setAttribute("src", pregunta.imagen);
-    style("imagen").height = "200px";
-    style("imagen").width = "100%";
-  } else {
-    style("imagen").height = "0px";
-    style("imagen").width = "0px";
-    setTimeout(() => {
-      select_id("imagen").setAttribute("src", "");
-    }, 500);
-  }
 }
 
 function desordenarRespuestas(pregunta) {
@@ -254,7 +286,24 @@ function oprimir_btn() {
         }
         else {
           error++;
-          document.getElementById('error').textContent = error;
+          var terror = "";
+          for (var i = 0; i < error; i++) {
+            terror = terror + " X ";
+          }
+          Swal.fire({
+            html: '<div class="image-container">' +
+              '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+              '<p class="image-text">' + terror + '</p>' +
+              '</div>',
+            showConfirmButton: false,
+            showCancelButton: false,
+            background: 'transparent',
+            allowOutsideClick: true
+          });
+
+          setTimeout(function () {
+            Swal.close();
+          }, 2000);
         }
       }
     }
@@ -268,6 +317,20 @@ function oprimir_btn() {
         turnoE1 = false;
         if (cont < 1) {
           document.getElementById('iniciador').textContent = "TURNO EQUIPO 2";
+          Swal.fire({
+            html: '<div class="image-container">' +
+              '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+              '<p class="image-text">TURNO EQUIPO 2</p>' +
+              '</div>',
+            showConfirmButton: false,
+            showCancelButton: false,
+            background: 'transparent',
+            allowOutsideClick: true
+          });
+
+          setTimeout(function () {
+            Swal.close();
+          }, 2000);
         }
 
       }
@@ -276,6 +339,20 @@ function oprimir_btn() {
         turnoE1 = true;
         if (cont < 1) {
           document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";
+          Swal.fire({
+            html: '<div class="image-container">' +
+              '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+              '<p class="image-text">TURNO EQUIPO 1</p>' +
+              '</div>',
+            showConfirmButton: false,
+            showCancelButton: false,
+            background: 'transparent',
+            allowOutsideClick: true
+          });
+
+          setTimeout(function () {
+            Swal.close();
+          }, 2000);
         }
       }
       cont++;
@@ -283,74 +360,87 @@ function oprimir_btn() {
     if (cont >= 2) {
       if (scoreF1 > scoreF2) {
         document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";
-        alert("RONDA PARA EQUIPO 1");
+        Swal.fire({
+          html: '<div class="image-container">' +
+            '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+            '<p class="image-text">RONDA EQUIPO 1</p>' +
+            '</div>',
+          showConfirmButton: false,
+          showCancelButton: false,
+          background: 'transparent',
+          allowOutsideClick: true
+        });
+
+        setTimeout(function () {
+          Swal.close();
+        }, 2000);
         turnoE1 = true;
         firsWin = false;
       }
       if (scoreF2 > scoreF1) {
         document.getElementById('iniciador').textContent = "TURNO EQUIPO 2";
-        alert("RONDA PARA EQUIPO 2");
+        Swal.fire({
+          html: '<div class="image-container">' +
+            '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+            '<p class="image-text">RONDA EQUIPO 2</p>' +
+            '</div>',
+          showConfirmButton: false,
+          showCancelButton: false,
+          background: 'transparent',
+          allowOutsideClick: true
+        });
+
+        setTimeout(function () {
+          Swal.close();
+        }, 2000);
         turnoE1 = false;
         firsWin = false;
       }
       if (scoreF2 == scoreF1) {
-        
-        if(turnoE1){document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";}else{document.getElementById('iniciador').textContent = "TURNO EQUIPO 2"}
+
+        if (turnoE1) {
+          document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";
+          Swal.fire({
+            html: '<div class="image-container">' +
+              '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+              '<p class="image-text">TURNO EQUIPO 1</p>' +
+              '</div>',
+            showConfirmButton: false,
+            showCancelButton: false,
+            background: 'transparent',
+            allowOutsideClick: true
+          });
+
+          setTimeout(function () {
+            Swal.close();
+          }, 3000);
+        }
+        else {
+          document.getElementById('iniciador').textContent = "TURNO EQUIPO 2";
+          Swal.fire({
+            html: '<div class="image-container">' +
+              '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+              '<p class="image-text">TURNO EQUIPO 2</p>' +
+              '</div>',
+            showConfirmButton: false,
+            showCancelButton: false,
+            background: 'transparent',
+            allowOutsideClick: true
+          });
+
+          setTimeout(function () {
+            Swal.close();
+          }, 3000);
+        }
         cont = 0;
       }
 
 
       error = 0;
-      document.getElementById('error').textContent = error;
 
     }
 
 
-  }
-  if (aciertos == 4) {
-    if (turnoE1) {
-      scoreE1 = scoreR + scoreE1;
-    }
-    else {
-      scoreE2 = scoreR + scoreE2;
-    }
-    InicioRonda();
-    firsWin = true;
-    cont = 0;
-  }
-  if (error == 2) {
-    if (turnoE1) {
-      alert("Equipo 2 Preparese para robo de puntos");
-    }
-    else {
-      alert("Equipo 1 Preparese para robo de puntos");
-    }
-  }
-  if (error == 3 && robo == false) {
-    if (turnoE1) {
-      document.getElementById('iniciador').textContent = "TURNO EQUIPO 2";
-      alert("Equipo 2 Responda");
-      turnoE1 = false;
-    }
-    else {
-      document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";
-      alert("Equipo 1 Responda");
-      turnoE1 = true;
-    }
-    robo = true;
-  }else{
-    if(robo == true)
-    {
-      if (turnoE1) {
-        scoreE1 = scoreR + scoreE1;
-      }
-      else {
-        scoreE2 = scoreR + scoreE2;
-      }
-      InicioRonda();
-      firsWin = true;
-      cont = 0;
-    }
   }
 
   if (error == 4) {
@@ -370,6 +460,108 @@ function oprimir_btn() {
     firsWin = true;
     cont = 0;
   }
+
+  if (aciertos == 4) {
+    if (turnoE1) {
+      scoreE1 = scoreR + scoreE1;
+    }
+    else {
+      scoreE2 = scoreR + scoreE2;
+    }
+    InicioRonda();
+    firsWin = true;
+    cont = 0;
+  }
+
+  if (error == 2) {
+    if (turnoE1) {
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">PREPARESE ROBO DE PUNTOS</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
+      });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 3000);
+    }
+    else {
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">PREPARESE ROBO DE PUNTOS</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
+      });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 3000);
+    }
+  }
+
+  if (error == 3 && robo == false) {
+    if (turnoE1) {
+      document.getElementById('iniciador').textContent = "TURNO EQUIPO 2";
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">EQUIPO 2 ROBO DE PUNTOS</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
+      });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 3000);
+      turnoE1 = false;
+    }
+    else {
+      document.getElementById('iniciador').textContent = "TURNO EQUIPO 1";
+      Swal.fire({
+        html: '<div class="image-container">' +
+          '<img src="assets/img/MARCADORES.png" alt="Imagen">' +
+          '<p class="image-text">EQUIPO 1 ROBO DE PUNTOS</p>' +
+          '</div>',
+        showConfirmButton: false,
+        showCancelButton: false,
+        background: 'transparent',
+        allowOutsideClick: true
+      });
+
+      setTimeout(function () {
+        Swal.close();
+      }, 3000);
+      turnoE1 = true;
+    }
+    robo = true;
+  } else {
+    if (error == 3 && robo == true) {
+      if (turnoE1) {
+        scoreE1 = scoreR + scoreE1;
+      }
+      else {
+        scoreE2 = scoreR + scoreE2;
+      }
+      InicioRonda();
+      firsWin = true;
+      cont = 0;
+      robo = false;
+    }
+  }
+
+
   /*if (posibles_respuestas[i] == pregunta.respuesta) {
     preguntas_correctas++;
     scoreR = scoreR + 10;
